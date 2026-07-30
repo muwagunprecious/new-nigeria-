@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Outfit, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { GlobalStateProvider } from "@/context/GlobalStateContext";
 
@@ -13,6 +13,12 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -33,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${inter.variable} antialiased custom-cursor-active bg-[#0A0A0A] text-white`}>
+      <body className={`${outfit.variable} ${inter.variable} ${playfair.variable} antialiased custom-cursor-active bg-[#0A0A0A] text-white`}>
         <GlobalStateProvider>
           {children}
         </GlobalStateProvider>

@@ -5,6 +5,9 @@ import OpeningCurtain from '@/components/OpeningCurtain';
 import CustomCursor from '@/components/CustomCursor';
 import AudioMixer from '@/components/AudioMixer';
 import HeroSection from '@/components/HeroSection';
+import ForgottenHistoryBook from '@/components/ForgottenHistoryBook';
+import EveryNigerianStory from '@/components/EveryNigerianStory';
+import DidYouKnowBadge from '@/components/DidYouKnowBadge';
 import CultureSection from '@/components/CultureSection';
 import InteractiveMap from '@/components/InteractiveMap';
 import PresidentsTimeline from '@/components/PresidentsTimeline';
@@ -158,6 +161,8 @@ export default function Home() {
       {/* 3. WEBSITE CONTENT SCROLL STAGE */}
       <div className="relative z-10">
         <HeroSection />
+        <ForgottenHistoryBook />
+        <EveryNigerianStory />
         <CultureSection />
         <InteractiveMap />
         <PresidentsTimeline />
@@ -169,6 +174,9 @@ export default function Home() {
         <GallerySection />
         <Footer />
       </div>
+
+      {/* Did You Know floating badge */}
+      <DidYouKnowBadge />
     </main>
   );
 }

@@ -266,3 +266,81 @@ body {
   box-shadow: 0 0 0 4px #0A0A0A, 0 0 0 8px #FFD400;
   border-radius: 4px;
 }
+
+/* ========== CINEMATIC BOOK ANIMATIONS ========== */
+
+@keyframes pageTurn {
+  0% { transform: perspective(1200px) rotateY(0deg); }
+  100% { transform: perspective(1200px) rotateY(-180deg); }
+}
+
+@keyframes dustFloat {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.3; }
+  50% { transform: translateY(-40px) translateX(10px) scale(1.2); }
+}
+.animate-dust {
+  animation: dustFloat 8s ease-in-out infinite;
+}
+
+@keyframes lanternFlicker {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  25% { opacity: 0.6; transform: scale(0.98); }
+  50% { opacity: 0.9; transform: scale(1.02); }
+  75% { opacity: 0.7; transform: scale(0.99); }
+}
+.animate-lantern {
+  animation: lanternFlicker 3s ease-in-out infinite;
+}
+
+@keyframes paperShadow {
+  0%, 100% { box-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+  50% { box-shadow: 4px 6px 16px rgba(0,0,0,0.5); }
+}
+
+@keyframes featherFall {
+  0% { transform: translateY(-100vh) rotate(180deg) scale(0.5); opacity: 0; }
+  30% { opacity: 1; }
+  60% { transform: translateY(0) rotate(0deg) scale(1); }
+  70% { transform: translateY(-10px) rotate(-3deg) scale(1.02); }
+  80% { transform: translateY(5px) rotate(2deg) scale(0.98); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+.animate-feather {
+  animation: featherFall 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes goldenParticles {
+  0% { transform: translate(0, 0) scale(0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(var(--dx, 30px), var(--dy, -50px)) scale(1); opacity: 0; }
+}
+.animate-golden-particle {
+  animation: goldenParticles 1.5s ease-out forwards;
+}
+
+@keyframes inkSpread {
+  0% { clip-path: circle(0% at 50% 50%); }
+  100% { clip-path: circle(100% at 50% 50%); }
+}
+.animate-ink-spread {
+  animation: inkSpread 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes adireReveal {
+  0% { mask-image: linear-gradient(90deg, transparent 0%, transparent 100%); }
+  100% { mask-image: linear-gradient(90deg, black 0%, black 100%); }
+}
+
+/* Book page wrinkle texture overlay */
+.book-page-wrinkle {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.02) 2px,
+    rgba(0,0,0,0.02) 4px
+  );
+}
