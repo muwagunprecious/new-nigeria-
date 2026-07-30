@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, PanInfo } from 'framer-motion';
 import { ChevronDown, ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
 import { useGlobalState } from '@/context/GlobalStateContext';
 
