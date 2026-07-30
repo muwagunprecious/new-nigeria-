@@ -49,7 +49,7 @@ export default function DidYouKnowBadge() {
                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#8B7355]">Did You Know?</span>
               </div>
               <p className="text-sm font-serif italic leading-relaxed text-[#3C2415]">
-                "{fact}"
+                &ldquo;{fact}&rdquo;
               </p>
               <div className="mt-3 flex justify-end">
                 <span className="text-[10px] text-[#C49A3C] font-bold">✦ Heritage Fact</span>

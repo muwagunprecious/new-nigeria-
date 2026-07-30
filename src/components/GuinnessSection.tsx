@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Award, Compass, Milestone, Users } from 'lucide-react';
+import { Award, Milestone } from 'lucide-react';
 import { useGlobalState } from '@/context/GlobalStateContext';
 
 interface Attempt {
@@ -21,7 +21,7 @@ const attempts: Attempt[] = [
 ];
 
 export default function GuinnessSection() {
-  const { calmMode, passportStamps } = useGlobalState();
+  const { passportStamps } = useGlobalState();
   const [timeLeft, setTimeLeft] = useState({ days: 87, hours: 14, minutes: 32, seconds: 45 });
 
   // Scoreboard Countdown Tick
@@ -66,7 +66,7 @@ export default function GuinnessSection() {
             Making History (5th Attempt)
           </h2>
           <p className="text-gray-400 mt-4 max-w-xl mx-auto font-medium">
-            Adetunwase Adenle is leading a historic project to build the world's largest animated cultural collage.
+            Adetunwase Adenle is leading a historic project to build the world&apos;s largest animated cultural collage.
           </p>
         </div>
 
@@ -188,7 +188,7 @@ export default function GuinnessSection() {
               <div className="absolute inset-0 rounded-full border-4 border-white opacity-25 border-dashed" />
             </motion.div>
             <h4 className="text-xl font-extrabold uppercase mt-6 text-white font-outfit">
-              Adetunwase's 5th Medal
+              Adetunwase&apos;s 5th Medal
             </h4>
             <p className="text-xs text-gray-500 max-w-xs mt-2 font-medium">
               Tap the giant medal to shower the page in golden victory particles.

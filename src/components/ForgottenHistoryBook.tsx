@@ -209,7 +209,9 @@ const pages: BookPage[] = [
 // ====== WEB AUDIO HELPERS ======
 function createAudioContext(): AudioContext | null {
   try {
-    return new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AC = window.AudioContext;
+    if (AC) return new AC();
+    return new (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext();
   } catch {
     return null;
   }
@@ -358,11 +360,10 @@ export default function ForgottenHistoryBook({ onComplete }: { onComplete?: () =
   const audioCtxRef = useRef<AudioContext | null>(null);
   const stopMusicRef = useRef<(() => void) | null>(null);
   const autoTurnRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const { speak, stop: stopNarration, speaking } = useNarration();
+  const { speak, speaking } = useNarration();
 
   const sectionRef = useRef<HTMLElement>(null);
   const dragX = useMotionValue(0);
-  const dragProgress = useTransform(dragX, [-150, 0, 150], [-1, 0, 1]);
   const totalPages = pages.length;
 
   const initAudio = useCallback(() => {
@@ -397,7 +398,7 @@ export default function ForgottenHistoryBook({ onComplete }: { onComplete?: () =
   const speakPage = useCallback((index: number) => {
     if (index < 0 || index >= totalPages) return;
     speak(pages[index].narration);
-  }, [speak]);
+  }, [speak, totalPages]);
 
   useEffect(() => {
     if (phase === 'intro' && audioCtxRef.current && soundEnabled && !calmMode) {
@@ -437,7 +438,7 @@ export default function ForgottenHistoryBook({ onComplete }: { onComplete?: () =
     }
   }, [isComplete, onComplete]);
 
-  const handleDragEnd = (_: any, info: PanInfo) => {
+  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     setIsDragging(false);
     const threshold = 60;
     if (info.offset.x < -threshold) turnPage(1);
@@ -468,7 +469,7 @@ export default function ForgottenHistoryBook({ onComplete }: { onComplete?: () =
                   Forgotten Nigerian History
                 </h2>
                 <p className="text-[#C49A3C] text-base sm:text-lg font-serif italic mb-8 leading-relaxed">
-                  "Every nation remembers. Every story deserves to be told."
+                  {'"'}Every nation remembers. Every story deserves to be told.{'"'}
                 </p>
                 <motion.button
                   onClick={handleBeginJourney}
@@ -599,7 +600,7 @@ export default function ForgottenHistoryBook({ onComplete }: { onComplete?: () =
 
                     {/* Narration text */}
                     <p className="text-xs sm:text-sm text-[#5C3D1A] font-serif leading-relaxed italic">
-                      "{pages[currentPage].narration}"
+                      {'"'}{pages[currentPage].narration}{'"'}
                     </p>
 
                     {/* Sound toggle */}

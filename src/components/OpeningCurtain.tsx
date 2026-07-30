@@ -14,7 +14,7 @@ const proverbs = [
 ];
 
 export default function OpeningCurtain() {
-  const { calmMode, setSoundActive } = useGlobalState();
+  const { setSoundActive } = useGlobalState();
   const [show, setShow] = useState(true);
   const [proverb, setProverb] = useState({ text: '', origin: '' });
 
@@ -38,7 +38,8 @@ export default function OpeningCurtain() {
 
   const playSynthIntro = () => {
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AC = window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext;
+      const ctx = new AC();
       // Synthesize a brief welcoming talking drum note
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -120,7 +121,7 @@ export default function OpeningCurtain() {
               ✧ Wisdom of the Soil ✧
             </span>
             <h2 className="text-white text-2xl font-extrabold font-outfit leading-relaxed italic mb-4">
-              "{proverb.text}"
+              {'"'}{proverb.text}{'"'}
             </h2>
             <p className="text-[#FF6B00] font-bold text-sm mb-8">— {proverb.origin}</p>
 

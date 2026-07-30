@@ -133,7 +133,7 @@ export default function HeroSection() {
             {t('heroTitle')}
           </h1>
           <p className="text-sm sm:text-xl font-bold font-inter text-gray-800 italic">
-            "{t('heroSubtitle')}"
+            {'"'}{t('heroSubtitle')}{'"'}
           </p>
         </motion.div>
 

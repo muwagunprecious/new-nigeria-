@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalState } from '@/context/GlobalStateContext';
-import { Lightbulb, Info } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 interface Hotspot {
   id: string;
@@ -50,13 +50,14 @@ const hotspots: Hotspot[] = [
 ];
 
 export default function AnimationSchool() {
-  const { calmMode, soundActive } = useGlobalState();
+  const { soundActive } = useGlobalState();
   const [activeSpot, setActiveSpot] = useState<Hotspot | null>(null);
 
   const triggerBeep = (freq: number) => {
     if (!soundActive) return;
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AC = window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext;
+      const ctx = new AC();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.connect(gain);

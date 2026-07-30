@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, Sliders, Music, Radio, HelpCircle } from 'lucide-react';
+import { Volume2, VolumeX, Sliders, Radio } from 'lucide-react';
 import { useGlobalState } from '@/context/GlobalStateContext';
 
 export default function AudioMixer() {
@@ -30,7 +30,7 @@ export default function AudioMixer() {
   const initAudio = () => {
     if (audioCtxRef.current) return;
     try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioCtx = window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext;
       const ctx = new AudioCtx();
       audioCtxRef.current = ctx;
 
@@ -78,6 +78,7 @@ export default function AudioMixer() {
     }
 
     return () => stopSynthLoop();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundActive]);
 
   const startSynthLoop = () => {

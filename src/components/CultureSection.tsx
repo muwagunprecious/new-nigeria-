@@ -44,7 +44,8 @@ export default function CultureSection() {
   const triggerSound = (pitch: number) => {
     if (!soundActive) return;
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AC = window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext;
+      const ctx = new AC();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.connect(gain);
@@ -120,7 +121,7 @@ export default function CultureSection() {
                 </span>
               </h3>
               <p className="text-gray-800 font-bold font-inter text-sm mb-3 italic">
-                "{tribe.greeting}"
+                {'"'}{tribe.greeting}{'"'}
               </p>
 
               <div className="border-t-2 border-black/20 pt-3 text-xs font-semibold text-black space-y-1 mt-auto">

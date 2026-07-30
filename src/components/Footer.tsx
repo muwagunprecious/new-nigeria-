@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalState } from '@/context/GlobalStateContext';
-import { Award, RefreshCw, Send, Sparkles } from 'lucide-react';
+import { RefreshCw, Sparkles } from 'lucide-react';
 
 interface Trivia {
   q: string;
@@ -49,7 +49,8 @@ export default function Footer() {
   const triggerSound = (isCorrect: boolean) => {
     if (!soundActive) return;
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AC = window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext;
+      const ctx = new AC();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.connect(gain);

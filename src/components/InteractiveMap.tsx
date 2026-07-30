@@ -87,7 +87,8 @@ export default function InteractiveMap() {
   const triggerStampSound = () => {
     if (!soundActive) return;
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AC = window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext;
+      const ctx = new AC();
       
       // Synthesize paper stamp "thump"
       const osc = ctx.createOscillator();
@@ -160,7 +161,7 @@ export default function InteractiveMap() {
             Interactive Passport Map
           </h2>
           <p className="text-gray-400 mt-4 max-w-xl mx-auto font-medium">
-            Explore the diversity across Nigeria's regions. Tap a bead to inspect the culture and stamp your session passport!
+            Explore the diversity across Nigeria&apos;s regions. Tap a bead to inspect the culture and stamp your session passport!
           </p>
         </div>
 
@@ -246,7 +247,7 @@ export default function InteractiveMap() {
                     </h3>
 
                     <div className="mt-4 space-y-3 font-semibold text-xs text-gray-800">
-                      <div>🗣️ <span className="underline">Greeting:</span> "{activeRegion.greeting}"</div>
+                      <div>🗣️ <span className="underline">Greeting:</span> {'"'}{activeRegion.greeting}{'"'}</div>
                       <div>👚 <span className="underline">Clothing:</span> {activeRegion.attire}</div>
                       <div>🍲 <span className="underline">Delicacy:</span> {activeRegion.delicacy}</div>
                       <div>🌟 <span className="underline">Legends:</span> {activeRegion.legends}</div>

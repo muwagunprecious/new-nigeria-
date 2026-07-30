@@ -121,10 +121,10 @@ export default function GallerySection() {
                   📍 {item.location}
                 </span>
                 <h3 className="text-xl font-extrabold font-outfit uppercase tracking-tight text-black mt-1 mb-3">
-                  "{item.title}"
+                  {'"'}{item.title}{'"'}
                 </h3>
                 <p className="text-xs font-semibold text-gray-700 italic leading-relaxed mb-6">
-                  "{item.snippet}"
+                  {'"'}{item.snippet}{'"'}
                 </p>
               </div>
 

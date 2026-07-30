@@ -36,7 +36,7 @@ export default function CustomCursor() {
       // Find cursor type from attributes or tags
       const cursorAttr = target.closest('[data-cursor]')?.getAttribute('data-cursor');
       if (cursorAttr) {
-        setCursorType(cursorAttr as any);
+        setCursorType(cursorAttr as typeof cursorType);
       } else if (
         target.tagName === 'BUTTON' ||
         target.tagName === 'A' ||
@@ -128,7 +128,7 @@ export default function CustomCursor() {
       }
 
       // Draw Click Particles (Ink Splashes)
-      particlesRef.current.forEach((p, idx) => {
+      particlesRef.current.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
         p.vy += 0.15; // Gravity
