@@ -208,7 +208,7 @@ export default function PresidentsTimeline() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
             >
-              💡 <span className="text-[#FF6B00]">Did you know?</span> The National Theatre in Iganmu, Lagos, was constructed in 1976 and its architecture was designed to resemble a military officer's peaked cap.
+              💡 <span className="text-[#FF6B00]">Did you know?</span> The National Theatre in Iganmu, Lagos, was constructed in 1976 and its architecture was designed to resemble a military officer&apos;s peaked cap.
             </motion.div>
           )}
         </AnimatePresence>
@@ -224,7 +224,7 @@ export default function PresidentsTimeline() {
             Cinematic Timeline
           </h2>
           <p className="text-gray-400 mt-4 max-w-xl mx-auto font-semibold">
-            A portrait gallery of Nigeria's leadership. Hover over any poster to read achievements and hear their story.
+            A portrait gallery of Nigeria&apos;s leadership. Hover over any poster to read achievements and hear their story.
           </p>
         </div>
 

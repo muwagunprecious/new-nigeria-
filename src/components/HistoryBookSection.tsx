@@ -105,7 +105,7 @@ export default function HistoryBookSection() {
   const playPageFlipSound = () => {
     if (!soundActive) return;
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       const bufferSize = ctx.sampleRate * 0.4;
       const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
       const data = buffer.getChannelData(0);
@@ -233,7 +233,7 @@ export default function HistoryBookSection() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
             >
-              💡 <span className="text-[#FF6B00]">Did you know?</span> Benin Bronzes are among the world's most celebrated metal artworks, exhibiting complex metallurgical casting techniques that date back over 600 years.
+              💡 <span className="text-[#FF6B00]">Did you know?</span> Benin Bronzes are among the world&apos;s most celebrated metal artworks, exhibiting complex metallurgical casting techniques that date back over 600 years.
             </motion.div>
           )}
         </AnimatePresence>
@@ -275,7 +275,7 @@ export default function HistoryBookSection() {
             </h2>
             <div className="w-16 h-1 bg-[#FFD400] mx-auto mb-6" />
             <p className="text-gray-300 text-xs sm:text-sm font-semibold italic max-w-sm mx-auto">
-              "Every nation remembers. Every story deserves to be told."
+              &quot;Every nation remembers. Every story deserves to be told.&quot;
             </p>
             <button className="btn-3d btn-3d-yellow text-xs mt-10">
               Open Chronicle
