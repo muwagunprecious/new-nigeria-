@@ -183,7 +183,7 @@ function NarratorSVG() {
 export default function NarratorBoy() {
   const { calmMode } = useGlobalState();
   const [currentSection, setCurrentSection] = useState('hero');
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [prevSection, setPrevSection] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [displayedText, setDisplayedText] = useState('');
@@ -310,14 +310,16 @@ export default function NarratorBoy() {
         </motion.button>
       )}
 
-      {/* The SVG Narrator */}
-      <motion.div
-        className="pointer-events-none w-[200px] h-[150px] -mb-1"
+      {/* The SVG Narrator — Clickable to toggle speech bubble */}
+      <motion.button
+        onClick={() => setIsVisible(!isVisible)}
+        className="pointer-events-auto w-[200px] h-[150px] -mb-1 focus:outline-none group cursor-pointer"
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+        title="Tap Emeka to hear his story"
       >
         <NarratorSVG />
-      </motion.div>
+      </motion.button>
     </div>
   );
 }
