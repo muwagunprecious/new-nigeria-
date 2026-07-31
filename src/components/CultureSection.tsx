@@ -105,13 +105,25 @@ export default function CultureSection() {
               {/* Card texture overlay */}
               <div className="absolute inset-0 bg-[radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
 
-              {/* Hand-drawn Tribe Illustration */}
-              <div className="border-4 border-black bg-gray-50 aspect-video mb-4 overflow-hidden relative shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1)] shrink-0">
+              {/* Hand-drawn Tribe Illustration with Realistic Animations */}
+              <div className="border-4 border-black bg-gray-50 aspect-video mb-4 overflow-hidden relative shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1)] shrink-0 group">
                 <img
                   src={tribe.img}
                   alt={tribe.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className={`w-full h-full object-cover transition-transform duration-[8000ms] ${
+                    calmMode ? '' : 'group-hover:scale-110 group-hover:rotate-1'
+                  }`}
                 />
+                
+                {/* Shimmer light sweep */}
+                {!calmMode && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer pointer-events-none" />
+                )}
+
+                {/* Golden dust particles overlay */}
+                {!calmMode && (
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-60 animate-pulse pointer-events-none" />
+                )}
               </div>
 
               <h3 className="text-xl font-extrabold font-outfit uppercase mb-1 text-black flex justify-between items-center">

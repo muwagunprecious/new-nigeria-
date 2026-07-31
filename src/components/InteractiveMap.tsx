@@ -166,64 +166,100 @@ export default function InteractiveMap() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-          {/* SVG Map Area (Bead Map) */}
-          <div className="lg:col-span-2 bg-black/40 border-4 border-black rounded shadow-[8px_8px_0_0_#000] p-6 relative aspect-[4/3] flex items-center justify-center">
-            {/* Hand-drawn outline of Nigeria (mocked abstractly via stylized boundaries) */}
-            <svg viewBox="0 0 100 100" className="w-full h-full stroke-black stroke-[0.5] fill-none max-h-[450px]">
-              {/* Abstract Boundary Threads */}
-              <path
-                d="M 15 60 C 20 40, 30 20, 50 10 C 70 8, 85 15, 95 30 C 90 50, 92 70, 85 85 C 75 90, 60 92, 50 82 C 35 90, 20 85, 15 60 Z"
-                stroke="#FF6B00"
-                strokeWidth="2.5"
-                strokeDasharray="4,6"
-                className="animate-sway-slow"
-              />
+          {/* 3D Nigeria Map with Location Poles */}
+          <div className="lg:col-span-2 border-4 border-black rounded shadow-[8px_8px_0_0_#000] relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
+            {/* 3D Map Image */}
+            <img
+              src="/assets/nigeria_map_3d.jpg"
+              alt="3D Nigeria Map"
+              className={`w-full h-full object-cover ${calmMode ? '' : 'animate-pan-slow'}`}
+            />
 
-              {/* Thread Connections */}
-              <line x1="20" y1="75" x2="50" y2="50" stroke="#FFF" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
-              <line x1="50" y1="50" x2="45" y2="15" stroke="#FFF" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
-              <line x1="50" y1="50" x2="68" y2="72" stroke="#FFF" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
-              <line x1="68" y1="72" x2="78" y2="82" stroke="#FFF" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
-              <line x1="45" y1="15" x2="85" y2="20" stroke="#FFF" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
-              <line x1="85" y1="20" x2="68" y2="72" stroke="#FFF" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
+            {/* Overlay: Location Poles for each region */}
+            {regions.map((region) => {
+              const isActive = activeRegion?.id === region.id;
+              return (
+                <button
+                  key={region.id}
+                  onClick={() => setActiveRegion(region)}
+                  className="absolute group focus:outline-none"
+                  style={{
+                    left: `${region.coords.cx}%`,
+                    top: `${region.coords.cy}%`,
+                    transform: 'translate(-50%, -100%)',
+                    zIndex: isActive ? 30 : 20,
+                  }}
+                  title={region.name}
+                >
+                  {/* Pole stick */}
+                  <div className="flex flex-col items-center">
+                    {/* Label badge — shows on hover/active */}
+                    <motion.div
+                      className="mb-1 px-2 py-0.5 rounded border-2 border-black text-[10px] font-black uppercase whitespace-nowrap shadow-[2px_2px_0_0_#000]"
+                      style={{ background: region.color, color: region.color === '#FFD400' ? '#000' : '#fff' }}
+                      initial={{ opacity: 0, y: 4, scale: 0.8 }}
+                      animate={isActive
+                        ? { opacity: 1, y: 0, scale: 1 }
+                        : { opacity: 0, y: 4, scale: 0.8 }}
+                      whileHover={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ type: 'spring', damping: 16 }}
+                    >
+                      {region.name.split(' ')[0]}
+                    </motion.div>
 
-              {/* Map Regions Nodes (Beads) */}
-              {regions.map((region) => (
-                <g key={region.id} className="cursor-pointer" onClick={() => setActiveRegion(region)}>
-                  {/* Outer pulsing ring if active */}
-                  {activeRegion?.id === region.id && (
-                    <circle
-                      cx={region.coords.cx}
-                      cy={region.coords.cy}
-                      r="7"
-                      fill="none"
-                      stroke={region.color}
-                      strokeWidth="2.5"
-                      className="animate-ping"
+                    {/* Pin head with pulse */}
+                    <div className="relative flex items-center justify-center">
+                      {/* Pulsing ring */}
+                      {!calmMode && (
+                        <motion.div
+                          className="absolute rounded-full border-2"
+                          style={{ borderColor: region.color, width: 28, height: 28 }}
+                          animate={{ scale: [1, 1.8, 1], opacity: [0.8, 0, 0.8] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
+                        />
+                      )}
+                      {/* Pin circle */}
+                      <div
+                        className={`w-5 h-5 rounded-full border-[3px] border-black shadow-[2px_2px_0_0_#000] z-10 transition-transform group-hover:scale-125 ${isActive ? 'scale-125' : ''}`}
+                        style={{ background: region.color }}
+                      >
+                        {/* Stamp checkmark if collected */}
+                        {passportStamps.includes(region.id) && (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-[7px] text-white font-black">✓</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Pole stem */}
+                    <div
+                      className="w-[3px] rounded-b shadow-sm"
+                      style={{ height: '28px', background: `linear-gradient(to bottom, ${region.color}, #000)` }}
                     />
-                  )}
 
-                  {/* Main Bead */}
-                  <circle
-                    cx={region.coords.cx}
-                    cy={region.coords.cy}
-                    r="4.5"
-                    fill={region.color}
-                    stroke="#000"
-                    strokeWidth="2"
-                    className="hover:scale-125 transition-transform"
-                    data-cursor="stamp"
-                  />
-                </g>
-              ))}
-            </svg>
+                    {/* Shadow at base */}
+                    <div
+                      className="w-4 h-[4px] rounded-full opacity-40 -mt-[2px]"
+                      style={{ background: '#000', filter: 'blur(2px)' }}
+                    />
+                  </div>
+                </button>
+              );
+            })}
 
             {/* Compass rose */}
-            <div className="absolute top-4 right-4 flex flex-col items-center opacity-60">
-              <Compass className="w-8 h-8 text-[#FFD400] animate-spin" style={{ animationDuration: '30s' }} />
-              <span className="text-[10px] font-bold mt-1 tracking-widest">N</span>
+            <div className="absolute top-3 right-3 flex flex-col items-center opacity-80 bg-black/50 rounded-full p-1">
+              <Compass className="w-6 h-6 text-[#FFD400] animate-spin" style={{ animationDuration: '30s' }} />
+              <span className="text-[8px] font-bold text-white mt-0.5 tracking-widest">N</span>
+            </div>
+
+            {/* Click hint */}
+            <div className="absolute bottom-3 left-3 bg-black/70 text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1.5 rounded border-2 border-[#FFD400]">
+              📍 Tap a pole to explore each region
             </div>
           </div>
+
 
           {/* Region Details & Passport Panel */}
           <div className="space-y-8">

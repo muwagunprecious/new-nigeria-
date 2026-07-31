@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import OpeningCurtain from '@/components/OpeningCurtain';
 import CustomCursor from '@/components/CustomCursor';
+import NarratorBoy from '@/components/NarratorBoy';
 import AudioMixer from '@/components/AudioMixer';
 import HeroSection from '@/components/HeroSection';
-import ForgottenHistoryBook from '@/components/ForgottenHistoryBook';
-import EveryNigerianStory from '@/components/EveryNigerianStory';
+import HistoryBookSection from '@/components/HistoryBookSection';
 import DidYouKnowBadge from '@/components/DidYouKnowBadge';
 import CultureSection from '@/components/CultureSection';
 import InteractiveMap from '@/components/InteractiveMap';
@@ -88,6 +88,7 @@ export default function Home() {
       {/* 1. SENSORY / INTRO OVERLAYS */}
       <OpeningCurtain />
       <CustomCursor />
+      <NarratorBoy />
       <AudioMixer />
 
       {/* 2. FLOATING CONTROL NAVIGATION DASHBOARD */}
@@ -161,8 +162,7 @@ export default function Home() {
       {/* 3. WEBSITE CONTENT SCROLL STAGE */}
       <div className="relative z-10">
         <HeroSection />
-        <ForgottenHistoryBook />
-        <EveryNigerianStory />
+        <HistoryBookSection />
         <CultureSection />
         <InteractiveMap />
         <PresidentsTimeline />

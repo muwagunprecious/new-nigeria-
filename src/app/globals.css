@@ -344,3 +344,30 @@ body {
     rgba(0,0,0,0.02) 4px
   );
 }
+
+/* ========== REALISTIC PRESIDENT ANIMATIONS ========== */
+@keyframes eyelidBlink {
+  0%, 95%, 100% { transform: scaleY(0); opacity: 0; }
+  97.5% { transform: scaleY(1); opacity: 0.75; }
+}
+.animate-blink {
+  animation: eyelidBlink 5s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes shimmerSweep {
+  0% { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+.animate-shimmer {
+  animation: shimmerSweep 3s ease-in-out infinite;
+}
+
+@keyframes panSlow {
+  0%, 100% { transform: scale(1.02) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-1%, -1%); }
+}
+.animate-pan-slow {
+  animation: panSlow 12s ease-in-out infinite;
+}
+
