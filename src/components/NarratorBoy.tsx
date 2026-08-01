@@ -8,8 +8,13 @@ import { X, ChevronDown } from 'lucide-react';
 const SECTION_MESSAGES: Record<string, { title: string; text: string; mood: 'curious' | 'sad' | 'proud' | 'excited' | 'angry' }> = {
   hero: {
     title: 'What are the stories slowly forgotten?',
-    text: 'Welcome. I am Emeka. There are stories about Nigeria that the world has never heard. Let me walk with you...',
+    text: 'Welcome. I am Emeka. We are on an official Guinness World Record mission to collect 20,000 Nigerian stories! Let me walk with you...',
     mood: 'curious',
+  },
+  'record-mission': {
+    title: 'Official Guinness Record Goal',
+    text: 'Target: 20,000 animated stories! 4-time record holder Adetunwase Adenle is leading this. We need your story to break the record!',
+    mood: 'excited',
   },
   'history-book-section': {
     title: 'The Benin Kingdom — 1897',
@@ -18,8 +23,8 @@ const SECTION_MESSAGES: Record<string, { title: string; text: string; mood: 'cur
   },
   'culture-section': {
     title: '250 Tribes. One Nation.',
-    text: 'Each tribe has its own language, music, food, and dance. But slowly... the youth stop speaking their mother tongue.',
-    mood: 'sad',
+    text: 'Each tribe has its own language, music, food, and dance. By animating these 20,000 stories, we preserve our heritage forever!',
+    mood: 'proud',
   },
   'presidents-section': {
     title: 'The Leaders Who Shaped Us',
@@ -37,9 +42,9 @@ const SECTION_MESSAGES: Record<string, { title: string; text: string; mood: 'cur
     mood: 'excited',
   },
   'submission-section': {
-    title: 'Your Story Matters.',
-    text: "Every Nigerian has a story. Your grandmother's recipe. Your father's village. Your childhood. Submit it. Before it disappears.",
-    mood: 'curious',
+    title: 'Your Story = World Record Entry!',
+    text: "Every story submitted gets officially credited in the Guinness Record submission archive. Submit yours now before we hit 20,000!",
+    mood: 'excited',
   },
 };
 

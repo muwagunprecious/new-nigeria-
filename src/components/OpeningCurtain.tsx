@@ -15,26 +15,35 @@ const proverbs = [
 
 export default function OpeningCurtain() {
   const { setSoundActive } = useGlobalState();
-  const [show, setShow] = useState(true);
+  // Only show the intro curtain once per browser session
+  const [show, setShow] = useState(false);
   const [proverb, setProverb] = useState({ text: '', origin: '' });
 
+  const handleDismiss = () => {
+    setShow(false);
+    sessionStorage.setItem('nigeria_intro_seen', '1');
+  };
+
   useEffect(() => {
+    // Check if user has already seen the intro this session
+    const alreadySeen = sessionStorage.getItem('nigeria_intro_seen');
+    if (alreadySeen) {
+      setShow(false);
+      return;
+    }
+
     // Select random proverb
     const rand = proverbs[Math.floor(Math.random() * proverbs.length)];
     setProverb(rand);
+    setShow(true);
 
     // Auto dismiss after 7 seconds if not manually skipped
     const timer = setTimeout(() => {
       handleDismiss();
     }, 7000);
     return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleDismiss = () => {
-    setShow(false);
-    // Auto-enable sound after skip if not in calmMode (or let user unmute)
-    // To respect browser requirements, we'll keep it muted but signal readiness
-  };
 
   const playSynthIntro = () => {
     try {

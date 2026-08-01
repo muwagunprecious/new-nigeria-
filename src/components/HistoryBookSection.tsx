@@ -257,8 +257,12 @@ export default function HistoryBookSection() {
         {!isBookOpen && (
           /* Cover Mode */
           <motion.div
-            className="comic-card max-w-lg w-full bg-[#3E2723] border-[6px] border-black p-12 text-center shadow-[12px_12px_0_0_#000] cursor-pointer hover:translate-y-[-4px] hover:shadow-[16px_16px_0_0_#000] transition-all"
-            style={{ backgroundImage: "url('/assets/paper_texture.jpg')", backgroundSize: 'cover', backgroundBlendMode: 'multiply' }}
+            className="comic-card max-w-lg w-full bg-[#1F0E08] border-[6px] border-[#FFD400] p-8 sm:p-10 text-center shadow-[16px_16px_0_0_#000] cursor-pointer hover:translate-y-[-4px] hover:shadow-[20px_20px_0_0_#FFD400] transition-all relative overflow-hidden group select-none"
+            style={{
+              backgroundImage: "linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/assets/paper_texture.jpg')",
+              backgroundSize: 'cover',
+              backgroundBlendMode: 'overlay',
+            }}
             onClick={() => {
               setIsBookOpen(true);
               playPageFlipSound();
@@ -267,19 +271,35 @@ export default function HistoryBookSection() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
           >
-            <span className="text-[#FFD400] text-[10px] font-black uppercase tracking-widest block mb-4">
-              ✦ Chapter I: Chronology ✦
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black font-outfit uppercase tracking-tight text-white mb-6 leading-none">
-              Forgotten<br/>Nigerian History
-            </h2>
-            <div className="w-16 h-1 bg-[#FFD400] mx-auto mb-6" />
-            <p className="text-gray-300 text-xs sm:text-sm font-semibold italic max-w-sm mx-auto">
-              &quot;Every nation remembers. Every story deserves to be told.&quot;
-            </p>
-            <button className="btn-3d btn-3d-yellow text-xs mt-10">
-              Open Chronicle
-            </button>
+            {/* Corner Gold Flourishes */}
+            <div className="absolute top-3 left-3 text-[#FFD400] text-xs font-black">✦</div>
+            <div className="absolute top-3 right-3 text-[#FFD400] text-xs font-black">✦</div>
+            <div className="absolute bottom-3 left-3 text-[#FFD400] text-xs font-black">✦</div>
+            <div className="absolute bottom-3 right-3 text-[#FFD400] text-xs font-black">✦</div>
+
+            {/* Inner Gold Foil Border Box */}
+            <div className="border-2 border-dashed border-[#FFD400]/60 p-6 sm:p-8 rounded-sm bg-black/50 backdrop-blur-[2px]">
+              <span className="inline-block bg-[#FF6B00] text-white border-2 border-black text-[10px] sm:text-xs font-black uppercase tracking-widest px-3 py-1 rounded shadow-[2px_2px_0_0_#000] mb-5 rotate-[-1deg]">
+                ✦ Chapter I: Chronology ✦
+              </span>
+
+              <h2 className="text-3xl sm:text-5xl font-black font-outfit uppercase tracking-tight text-white mb-4 leading-none drop-shadow-[3px_3px_0_#000]">
+                Forgotten<br/>
+                <span className="text-[#FFD400] drop-shadow-[2px_2px_0_#000]">Nigerian History</span>
+              </h2>
+
+              <div className="w-20 h-1.5 bg-gradient-to-r from-[#FF6B00] via-[#FFD400] to-[#FF6B00] mx-auto mb-5 rounded-full" />
+
+              <p className="text-amber-100 text-sm sm:text-base font-bold italic max-w-sm mx-auto leading-relaxed drop-shadow-[1px_1px_2px_rgba(0,0,0,0.9)]">
+                &quot;Every nation remembers. Every story deserves to be told.&quot;
+              </p>
+
+              <div className="mt-8">
+                <button className="btn-3d btn-3d-yellow text-xs sm:text-sm font-black uppercase tracking-wider px-6 py-3">
+                  📖 Open Chronicle
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
 

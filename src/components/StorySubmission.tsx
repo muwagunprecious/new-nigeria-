@@ -75,13 +75,13 @@ export default function StorySubmission() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-[#FFD400] text-sm font-extrabold uppercase tracking-wider block mb-2">
-            ✦ Lodge Your Narrative ✦
+            ✦ Official World Record Submission ✦
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold font-outfit uppercase tracking-tight text-white inline-block border-b-4 border-[#FFD400] pb-2">
-            Share Your Story
+            Submit Your Story
           </h2>
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto font-medium">
-            Be part of Guinness record history. Tell us your story, and watch it fly to the animation board!
+          <p className="text-gray-300 mt-4 max-w-xl mx-auto font-bold text-sm">
+            Be credited in official Guinness World Record history. Share your lore, memory, or cultural tale to help us reach 20,000 animated stories!
           </p>
         </div>
 
@@ -101,8 +101,18 @@ export default function StorySubmission() {
                 exit={{ scale: 0.9, y: 50, opacity: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                {/* Envelope details */}
-                <div className="absolute top-0 left-0 right-0 h-4 bg-red-600/10 border-b border-black/10" />
+                {/* Certificate Gold Ribbon Banner */}
+                <div className="bg-[#001D3D] text-[#FFD400] p-3 -mx-8 -mt-8 mb-6 border-b-4 border-black flex justify-between items-center px-8">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-white">🏆 Official Entry Sheet</span>
+                    <span className="bg-[#FF6B00] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded">
+                      Sequence #14,206
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest hidden sm:inline">
+                    Target: 20,000 Stories
+                  </span>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name field */}
